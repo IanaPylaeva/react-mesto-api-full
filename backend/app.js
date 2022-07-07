@@ -12,17 +12,22 @@ const { PORT = 3000 } = process.env;
 
 const { celebrate, Joi, errors } = require('celebrate');
 
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+
 const auth = require('./middlewares/auth');
 
 const { login, createUser } = require('./controllers/users');
 
 const NotFoundError = require('./errors/not-found-error'); // код 404
 
+
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(requestLogger); // подключаем логгер запросов
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
@@ -49,6 +54,8 @@ app.use('/', auth, require('./routes/cards'));
 app.use('*', (req, res, next) => {
   next(new NotFoundError('Страницы не существует'));
 });
+
+app.use(errorLogger); // подключаем логгер ошибок
 
 app.use(errors());
 
