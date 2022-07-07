@@ -20,7 +20,6 @@ const { login, createUser } = require('./controllers/users');
 
 const NotFoundError = require('./errors/not-found-error'); // код 404
 
-
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
 app.use(helmet());
