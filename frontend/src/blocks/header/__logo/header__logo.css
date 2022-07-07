@@ -1,0 +1,39 @@
+.header__logo {
+  width: 142px;
+  height: 33px;
+  padding: 0;
+  margin: 0 auto 41px 0;
+  display: flex;
+  transition: opacity .3s ease;
+}
+.header__logo:hover {
+  opacity: .6;
+}
+
+@media screen and (max-width: 900px) {
+  .header__logo {
+    width: 127.8px;
+    height: 29.7px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .header__logo {
+    width: 115.02px;
+    height: 26.3px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .header__logo {
+    order: 2;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .header__logo {
+    width: 103.74px;
+    height: 24.4px;
+    margin: 0 auto 31.6px 27px;
+  }
+}

@@ -1,0 +1,39 @@
+.profile__profile-info {
+  max-width: 336px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 22px auto 25px 0;
+}
+
+@media screen and (max-width: 700px) {
+  .profile__profile-info{
+    max-width: 280px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .profile__profile-info{
+    max-width: 268px;
+    margin: 26px auto 0;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .profile__profile-info{
+    max-width: 70%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .profile__profile-info{
+    max-width: 80%;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .profile__profile-info{
+    max-width: 88.125%;
+    flex-direction: row;
+  }
+}

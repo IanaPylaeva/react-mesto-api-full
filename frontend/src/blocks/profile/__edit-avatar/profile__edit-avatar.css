@@ -1,0 +1,42 @@
+.profile__edit-avatar {
+  width: 120px;
+  height: 120px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: opacity .3s ease;
+  background-image: url(../../../images/edit.svg);
+  background-size: 26px;
+  background-repeat: no-repeat;
+  background-position: center;
+  grid-column: 1/2;
+  grid-row: 1/2;
+  opacity: 0;
+}
+.profile__edit-avatar:hover {
+  background-color: rgba(0, 0, 0, .8);
+  opacity: 1;
+}
+
+
+@media screen and (max-width: 900px) {
+  .profile__edit-button {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .profile__edit-button {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .profile__edit-button {
+    width: 20px;
+    height: 20px;
+  }
+}

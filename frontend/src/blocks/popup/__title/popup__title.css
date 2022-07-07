@@ -1,0 +1,38 @@
+.popup__title {
+  width: 76.74%;
+  margin: 34px auto 54px 36px;
+  padding: 0;
+  color: #000000;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.208;
+}
+
+@media screen and (max-width: 1250px) {
+  .popup__title {
+    width: 90%;
+    margin: 34px auto 54px auto;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .popup__title {
+    width: 95%;
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .popup__title {
+    width: 80%;
+    margin: 25px auto 75px auto;
+    font-size: 18px;
+    line-height: 1.22;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .popup__title {
+    width: 84.39%;
+  }
+}

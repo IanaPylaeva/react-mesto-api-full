@@ -1,0 +1,30 @@
+.popup__container {
+  width: 430px;
+  margin: auto;
+  padding: 0;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  transition: opacity .3s ease;
+}
+
+@media screen and (max-width: 1100px) {
+  .popup__container {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .popup__container {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .popup__container {
+    width: 88.125%;
+  }
+}

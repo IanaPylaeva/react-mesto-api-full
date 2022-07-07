@@ -1,0 +1,5 @@
+.element__likes-counter {
+  display: flex;
+  flex-direction: column;
+  height: 35px;
+}

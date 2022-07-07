@@ -1,0 +1,8 @@
+.popup__zoom {
+  max-width: 75vw;
+  max-height: 75vh;
+  margin: auto auto 0 auto;
+  padding: 0;
+  display: flex;
+  transition: opacity .3s ease;
+}
