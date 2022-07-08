@@ -1,6 +1,7 @@
-require('dotenv').config();
+/*require('dotenv').config();
 
 console.log(process.env.NODE_ENV); // production
+*/
 
 const express = require('express');
 
