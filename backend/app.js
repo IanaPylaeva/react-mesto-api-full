@@ -12,11 +12,20 @@ const { PORT = 3000 } = process.env;
 
 const { celebrate, Joi, errors } = require('celebrate');
 
+const cors = require('cors');
+
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const auth = require('./middlewares/auth');
 
-const cors = require('./middlewares/cors');
+const allowedCors = {
+  origin: [
+    'https://domain.IanaPylaeva.nomoredomains.xyz',
+    'http://domain.IanaPylaeva.nomoredomains.xyz',
+    'http://localhost:3000',
+  ],
+  credentials: true, // куки
+};
 
 const { login, createUser } = require('./controllers/users');
 
@@ -27,7 +36,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 app.use(helmet());
 app.use(bodyParser.json());
 
-app.use(cors);
+app.use('*', cors(allowedCors));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
