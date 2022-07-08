@@ -16,6 +16,8 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const auth = require('./middlewares/auth');
 
+const cors = require('./middlewares/cors');
+
 const { login, createUser } = require('./controllers/users');
 
 const NotFoundError = require('./errors/not-found-error'); // код 404
@@ -24,6 +26,9 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 
 app.use(helmet());
 app.use(bodyParser.json());
+
+app.use(cors);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(requestLogger); // подключаем логгер запросов
