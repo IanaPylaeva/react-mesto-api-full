@@ -4,5 +4,11 @@
 Ссылка на сайт:
 domain.IanaPylaeva.nomoredomains.xyz
 
+Домен фронтенд:
+domain.IanaPylaeva.nomoredomains.xyz
+
+Домен бэкенд:
+domain.IanaPylaeva.bcknd.nomoredomains.xyz
+
 Публичный IP-адрес
 51.250.90.162
