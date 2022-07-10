@@ -20,7 +20,7 @@ module.exports.createUser = (req, res, next) => {
       password: hash, // записываем хеш в базу
     }))
     .then(() => {
-      res.status(200).send({
+      res.send({
         name, about, avatar, email,
       });
     })
@@ -38,7 +38,7 @@ module.exports.createUser = (req, res, next) => {
 /* Получить всех пользователей */
 module.exports.getAllUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.status(200).send(users))
+    .then((users) => res.send(users))
     .catch(() => next(new ServerError('Ошибка на стороне сервера')));
 };
 
