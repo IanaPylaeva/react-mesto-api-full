@@ -4,6 +4,8 @@ const User = require('../models/user');
 const NotFoundError = require('../errors/not-found-error'); // код 404
 const ServerError = require('../errors/server-error'); // код 500
 const ValidationError = require('../errors/validation-error'); // код 400
+const EmailExistsError = require('../errors/email-exists-error'); // код 409
+const AuthorizationError = require('../errors/authorization-error'); // код 401
 
 /* Создать пользователя */
 module.exports.createUser = (req, res, next) => {
@@ -29,7 +31,7 @@ module.exports.createUser = (req, res, next) => {
         return next(new ValidationError('Переданы некорректные данные при создании пользователя'));
       }
       if (error.code === 11000) {
-        return res.status(409).send({ message: 'Email уже существует' });
+        return next(new EmailExistsError('Email уже существует'));
       }
       return next(error);
     });
@@ -112,16 +114,12 @@ module.exports.login = (req, res) => {
       }
       const token = jwt.sign(
         { _id: user._id },
-        'some-secret-key',
+        `${NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret'}`,
         { expiresIn: '7d' }, // токен будет просрочен через 7 дней после создания
       );
       return res.send({ token });
     })
-    .catch((err) => {
-      res
-        .status(401)
-        .send({ message: err.message });
-    });
+    .catch(() => new AuthorizationError('Передан неверный логин или пароль'));
 };
 
 /* Получение информации о пользователе */

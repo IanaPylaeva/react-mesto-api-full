@@ -1,6 +1,7 @@
 const Card = require('../models/card');
 const ValidationError = require('../errors/validation-error'); // код 400
 const NotFoundError = require('../errors/not-found-error'); // код 404
+const ForbiddenError = require('../errors/forbidden-error'); // код 403
 
 /* Получить все карточки */
 module.exports.getAllCards = (req, res, next) => {
@@ -30,7 +31,7 @@ module.exports.deleteCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Карточка с указанным _id не найдена');
       } if (!card.owner.equals(req.user._id)) {
-        return res.status(403).send({ message: 'Нельзя удалить чужую карточку' });
+        return next(new ForbiddenError('Нельзя удалить чужую карточку'));
       }
       return card.remove()
         .then(() => res.status(200).send({ message: 'Карточка удалена' }));
