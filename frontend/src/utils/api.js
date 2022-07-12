@@ -98,9 +98,8 @@ class Api {
 };
 
 export const api = new Api({
-  serverUrl: 'https://mesto.nomoreparties.co/v1/cohort-39',//Адрес сервера проекта Mesto
+  serverUrl: 'https://domain.IanaPylaeva.bcknd.nomoredomains.xyz',//Адрес сервера проекта Mesto
   headers: {
-    authorization: 'a8870c90-962a-4e80-9995-2681c6a34a53',//Мой токен
     'Content-Type': 'application/json'
   }
 })

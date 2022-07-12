@@ -5,7 +5,7 @@ function checkResponse(res) {
   return Promise.reject(res.status);
 }
 
-export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = 'domain.IanaPylaeva.bcknd.nomoredomains.xyz';
 
 export function registerUser(email, password) {
   return fetch(`${BASE_URL}/signup`, {
