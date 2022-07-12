@@ -12,7 +12,7 @@ export function registerUser(email, password) {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
   }).then(checkResponse);
@@ -23,7 +23,7 @@ export function loginUser(email, password) {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
   }).then(checkResponse);
@@ -33,9 +33,9 @@ export function getContent(jwt) {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
-      Accept: 'application/json',
-      'Content-Type': "application/json",
-      Authorization: `Bearer ${jwt}`,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${jwt}`,
     },
   }).then(checkResponse);
 }
