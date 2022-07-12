@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs'); // импортируем bcrypt
 const jwt = require('jsonwebtoken'); // импортируем модуль jsonwebtoken
 const User = require('../models/user');
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 const NotFoundError = require('../errors/not-found-error'); // код 404
 const ServerError = require('../errors/server-error'); // код 500
 const ValidationError = require('../errors/validation-error'); // код 400
