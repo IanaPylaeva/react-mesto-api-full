@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const AuthorizationError = require('../errors/authorization-error'); // код 401
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 module.exports = (req, res, next) => { // достаём авторизационный заголовок
   const { authorization } = req.headers;
 
@@ -13,7 +15,7 @@ module.exports = (req, res, next) => { // достаём авторизацио�
   let payload;
 
   try {
-    payload = jwt.verify(token, 'some-secret-key'); // попытаемся верифицировать токен
+    payload = jwt.verify(token, `${NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret'}`); // попытаемся верифицировать токен
   } catch (err) {
     // отправим ошибку, если не получилось
     return next(new AuthorizationError('Необходима авторизация'));
