@@ -214,7 +214,7 @@ class Api {
 };
 
 export const api = new Api({
-  serverUrl: 'https://domain.IanaPylaeva.bcknd.nomoredomains.xyz',
+  serverUrl: `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3000'}`,
   headers: {
     'Content-Type': 'application/json',
   }
