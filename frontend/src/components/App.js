@@ -89,7 +89,7 @@ function App() {
         setCards(res[1]);
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
       });
     }, []);
 
