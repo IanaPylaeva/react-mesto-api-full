@@ -35,7 +35,7 @@ export function getContent(jwt) {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${jwt}`,
+      'Authorization': 'Bearer '+ jwt,
     },
   }).then(checkResponse);
 }
