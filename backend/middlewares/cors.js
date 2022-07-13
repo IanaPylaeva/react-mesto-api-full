@@ -3,6 +3,8 @@ const allowedCors = [
   'localhost:3000',
   'http://domain.ianapylaeva.nomoredomains.xyz',
   'https://domain.ianapylaeva.nomoredomains.xyz',
+  'http://domain.ianapylaeva.bcknd.nomoredomains.xyz',
+  'https://domain.ianapylaeva.bcknd.nomoredomains.xyz',
 ];
 
 const cors = (req, res, next) => {
