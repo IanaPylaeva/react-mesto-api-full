@@ -133,6 +133,7 @@ class Api {
   /* Получить карточки с сервера */
   getInitialCards() {
     return fetch(`${this._serverUrl}/cards`, {
+      mode: 'cors',
       method: 'GET',
       headers: this._getHeaders(),
     })
