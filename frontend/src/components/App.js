@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Routes, Route, Navigate, useHistory } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import api from "../utils/api.js";
 import * as auth from "../utils/auth.js";
 import Header from "./Header.js";
@@ -20,7 +20,7 @@ import fail from '../images/fail.svg';
 const defaultSelectedCard = { name: '', link: '' };
 
 function App() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -39,7 +39,7 @@ function App() {
     auth.registerUser(email, password).then(() => {
       setPopupImage(success);
       setPopupTitle("Вы успешно зарегистрировались!");
-      history.push("/sign-in");
+      navigate("/sign-in");
     }).catch(() => {
       setPopupImage(fail);
       setPopupTitle("Что-то пошло не так! Попробуйте ещё раз.");
@@ -52,7 +52,7 @@ function App() {
       localStorage.setItem('jwt', res.token);
       setIsLoggedIn(true);
       setEmail(email);
-      history.push("/");
+      navigate("/");
     }).catch(() => {
       setPopupImage(fail);
       setPopupTitle("Что-то пошло не так! Попробуйте ещё раз.");
@@ -77,9 +77,9 @@ function App() {
   
   useEffect(() => {
     if (isLoggedIn) {
-      history.push("/");
+      navigate("/");
     }
-  }, [isLoggedIn, history]);
+  }, [isLoggedIn, navigate]);
   
   /* Одновременное получение данных пользователя и карточек */
   useEffect(() => { 
@@ -114,7 +114,7 @@ function App() {
   function handleLogOut() {
     setIsLoggedIn(false);
     setEmail(null);
-    history.push("/sign-in");
+    navigate("/sign-in");
     localStorage.removeItem("jwt");//удаление токена из локального хранилища
   }
 
