@@ -100,7 +100,6 @@ class Api {
 export const api = new Api({
   serverUrl: 'https://domain.IanaPylaeva.bcknd.nomoredomains.xyz',//Адрес сервера проекта Mesto
   headers: {
-    'Accept': 'application/json',
     'Content-Type': 'application/json',
   }
 })
