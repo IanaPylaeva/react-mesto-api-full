@@ -123,17 +123,17 @@ class Api {
     // если ошибка, отклоняем промис
     return Promise.reject(`Ошибка: ${res.status}`);
   };
-  
+  /*
   _getHeaders(){
     const jwt = localStorage.getItem('jwt');
     return {authorization: `Bearer ${jwt}`, ...this._headers}
   }
+  */
 
   /* Получить карточки с сервера */
   getInitialCards() {
     return fetch(`${this._serverUrl}/cards`, {
-      method: 'GET',
-      headers: this._getHeaders(),
+      headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._headers},
     })
     .then(this._checkCorrectness);
   };
@@ -141,8 +141,7 @@ class Api {
   /* Получить информацию о пользователе с сервера */
   getUserData() {
     return fetch(`${this._serverUrl}/users/me`, {
-      method: 'GET',
-      headers: this._getHeaders(),
+      headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._headers},
     })
     .then(this._checkCorrectness);
   };
@@ -151,7 +150,7 @@ class Api {
   patchUserInfo(data) {
     return fetch(`${this._serverUrl}/users/me`, {
       method: 'PATCH',
-      headers: this._getHeaders(),
+      headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._headers},
       body: JSON.stringify({
         name: data.name,
         about: data.about,
@@ -164,7 +163,7 @@ class Api {
   patchUserAvatar(data) {
     return fetch(`${this._serverUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._getHeaders(),
+      headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._headers},
       body: JSON.stringify({
         avatar: data.avatar,
       })
@@ -176,7 +175,7 @@ class Api {
   postCard(card) {
     return fetch(`${this._serverUrl}/cards`, {
       method: 'POST',
-      headers: this._getHeaders(),
+      headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._headers},
       body: JSON.stringify({
         name: card.name,
         link: card.link,
@@ -189,7 +188,7 @@ class Api {
   deleteCard(id) {
     return fetch(`${this._serverUrl}/cards/${id}`, {
     method: 'DELETE',
-    headers: this._getHeaders(),
+    headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._headers},
     })
     .then(this._checkCorrectness);
   };
@@ -198,7 +197,7 @@ class Api {
   putLike(id) {
     return fetch(`${this._serverUrl}/cards/${id}/likes`, {
     method: 'PUT',
-    headers: this._getHeaders(),
+    headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._headers},
     })
     .then(this._checkCorrectness);
   };
@@ -207,7 +206,7 @@ class Api {
   deleteLike(id) {
     return fetch(`${this._serverUrl}/cards/${id}/likes`, {
     method: 'DELETE',
-    headers: this._getHeaders(),
+    headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._headers},
     })
     .then(this._checkCorrectness);
   };
