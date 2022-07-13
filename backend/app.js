@@ -22,12 +22,10 @@ const auth = require('./middlewares/auth');
 
 const allowedCors = {
   origin: [
-    'https://domain.ianapylaeva.nomoredomains.xyz',
-    'http://domain.ianapylaeva.nomoredomains.xyz',
     'http://localhost:3000',
+    'http://domain.ianapylaeva.nomoredomains.xyz',
+    'https://domain.ianapylaeva.nomoredomains.xyz',
   ],
-  credentials: true, // куки
-  method: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 };
 
 const { login, createUser } = require('./controllers/users');
@@ -39,7 +37,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 app.use(helmet());
 app.use(bodyParser.json());
 
-app.use('*', cors(allowedCors));
+app.use(cors(allowedCors));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
