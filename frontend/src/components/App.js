@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import {api} from "../utils/api.js";
+import api from "../utils/api.js";
 import * as auth from "../utils/auth.js";
 import Header from "./Header.js";
 import Main from "./Main.js";

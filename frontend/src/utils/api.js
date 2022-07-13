@@ -123,17 +123,17 @@ class Api {
     // если ошибка, отклоняем промис
     return Promise.reject(`Ошибка: ${res.status}`);
   };
-  /*
+  
   _getHeaders(){
     const jwt = localStorage.getItem('jwt');
     return {authorization: `Bearer ${jwt}`, ...this._headers}
   }
-  */
+  
 
   /* Получить карточки с сервера */
   getInitialCards() {
     return fetch(`${this._serverUrl}/cards`, {
-      headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._headers},
+      headers: this._getHeaders(),
     })
     .then(this._checkCorrectness);
   };
@@ -141,7 +141,7 @@ class Api {
   /* Получить информацию о пользователе с сервера */
   getUserData() {
     return fetch(`${this._serverUrl}/users/me`, {
-      headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._headers},
+      headers: this._getHeaders(),
     })
     .then(this._checkCorrectness);
   };
@@ -150,7 +150,7 @@ class Api {
   patchUserInfo(data) {
     return fetch(`${this._serverUrl}/users/me`, {
       method: 'PATCH',
-      headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._headers},
+      headers: this._getHeaders(),
       body: JSON.stringify({
         name: data.name,
         about: data.about,
@@ -163,7 +163,7 @@ class Api {
   patchUserAvatar(data) {
     return fetch(`${this._serverUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._headers},
+      headers: this._getHeaders(),
       body: JSON.stringify({
         avatar: data.avatar,
       })
@@ -175,7 +175,7 @@ class Api {
   postCard(card) {
     return fetch(`${this._serverUrl}/cards`, {
       method: 'POST',
-      headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._headers},
+      headers: this._getHeaders(),
       body: JSON.stringify({
         name: card.name,
         link: card.link,
@@ -188,7 +188,7 @@ class Api {
   deleteCard(id) {
     return fetch(`${this._serverUrl}/cards/${id}`, {
     method: 'DELETE',
-    headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._headers},
+    headers: this._getHeaders(),
     })
     .then(this._checkCorrectness);
   };
@@ -197,7 +197,7 @@ class Api {
   putLike(id) {
     return fetch(`${this._serverUrl}/cards/${id}/likes`, {
     method: 'PUT',
-    headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._headers},
+    headers: this._getHeaders(),
     })
     .then(this._checkCorrectness);
   };
@@ -206,15 +206,17 @@ class Api {
   deleteLike(id) {
     return fetch(`${this._serverUrl}/cards/${id}/likes`, {
     method: 'DELETE',
-    headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...this._headers},
+    headers: this._getHeaders(),
     })
     .then(this._checkCorrectness);
   };
 };
 
-export const api = new Api({
+const api = new Api({
   serverUrl: 'https://domain.ianapylaeva.bcknd.nomoredomains.xyz',
   headers: {
     'Content-Type': 'application/json',
   }
-})
+});
+
+export default api;
