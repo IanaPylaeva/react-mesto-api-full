@@ -14,12 +14,15 @@ const { PORT = 3000 } = process.env;
 
 const { celebrate, Joi, errors } = require('celebrate');
 
-const cors = require('cors');
+/* const cors = require('cors'); */
+const cors = require('./middlewares/cors');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const auth = require('./middlewares/auth');
 
+app.use(cors);
+/*
 const allowedCors = {
   origin: [
     'http://localhost:3000',
@@ -34,7 +37,7 @@ const allowedCors = {
 };
 
 app.use('*', cors(allowedCors));
-
+*/
 const { login, createUser } = require('./controllers/users');
 
 const NotFoundError = require('./errors/not-found-error'); // код 404
