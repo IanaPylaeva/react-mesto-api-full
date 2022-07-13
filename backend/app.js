@@ -22,8 +22,8 @@ const auth = require('./middlewares/auth');
 
 const allowedCors = {
   origin: [
-    'https://domain.IanaPylaeva.nomoredomains.xyz',
-    'http://domain.IanaPylaeva.nomoredomains.xyz',
+    'https://domain.ianapylaeva.nomoredomains.xyz',
+    'http://domain.ianapylaeva.nomoredomains.xyz',
     'http://localhost:3000',
   ],
   credentials: true, // куки
