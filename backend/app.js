@@ -27,7 +27,7 @@ const allowedCors = {
     'http://localhost:3000',
   ],
   credentials: true, // куки
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  method: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 };
 
 const { login, createUser } = require('./controllers/users');
