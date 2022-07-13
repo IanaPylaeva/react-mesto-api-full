@@ -14,14 +14,15 @@ const { PORT = 3000 } = process.env;
 
 const { celebrate, Joi, errors } = require('celebrate');
 
-/* const cors = require('cors'); */
+const cors = require('cors');
+/*
 const cors = require('./middlewares/cors');
-
+*/
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const auth = require('./middlewares/auth');
 
-app.use(cors);
+app.use(cors());
 /*
 const allowedCors = {
   origin: [
