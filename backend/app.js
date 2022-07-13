@@ -26,7 +26,11 @@ const allowedCors = {
     'http://domain.ianapylaeva.nomoredomains.xyz',
     'https://domain.ianapylaeva.nomoredomains.xyz',
   ],
+  credentials: true, // куки
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 };
+
+app.use('*', cors(allowedCors));
 
 const { login, createUser } = require('./controllers/users');
 
@@ -36,8 +40,6 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 
 app.use(helmet());
 app.use(bodyParser.json());
-
-app.use(cors(allowedCors));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
