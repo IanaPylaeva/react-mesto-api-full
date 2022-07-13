@@ -215,7 +215,6 @@ class Api {
 export const api = new Api({
   serverUrl: 'https://domain.ianapylaeva.bcknd.nomoredomains.xyz',
   headers: {
-    'Accept': 'application/json',
     'Content-Type': 'application/json',
   }
 })
