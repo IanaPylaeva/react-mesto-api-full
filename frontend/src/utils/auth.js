@@ -21,6 +21,7 @@ export function registerUser(email, password) {
 export function loginUser(email, password) {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -31,11 +32,12 @@ export function loginUser(email, password) {
 
 export function getContent(jwt) {
   return fetch(`${BASE_URL}/users/me`, {
-    method: 'GET',
+    method: 'GET',    
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer '+ jwt,
+      'Authorization': 'Bearer '+ {jwt},
     },
   }).then(checkResponse);
 }
