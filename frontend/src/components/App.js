@@ -70,13 +70,12 @@ function App() {
         .then((res) => {
           setEmail(res.data.email);
           setIsLoggedIn(true);
-          navigate('/');
         })
         .catch((err) => {
         console.log(err);
       })
     }
-  }, [navigate]);
+  }, []);
   
   /* Одновременное получение данных пользователя и карточек */
   useEffect(() => {
@@ -85,12 +84,7 @@ function App() {
       api
         .getUserData()
         .then((res) => {
-          setCurrentUser({
-            name: res.data.name,
-            about: res.data.about,
-            avatar:res.data.avatar,
-            _id: res.data._id,
-          });
+          setCurrentUser(res);
       })
       .catch((err) => {
         console.log(err);
