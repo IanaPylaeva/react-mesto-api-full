@@ -7,23 +7,23 @@ function checkResponse(res) {
 
 export const BASE_URL = 'https://domain.ianapylaeva.bcknd.nomoredomains.xyz';
 
-export function registerUser({ email, password }) {
+export function registerUser(email, password) {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
   }).then(checkResponse);
 }
 
-export function loginUser({ email, password }) {
+export function loginUser(email, password) {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
   }).then(checkResponse);
@@ -33,8 +33,8 @@ export function getContent(jwt) {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'Content-Type': 'application/json',
       'Authorization': `Bearer ${jwt}`,
     },
   }).then(checkResponse);
