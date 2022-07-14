@@ -51,12 +51,10 @@ function App() {
   function logIn(email, password) {
     auth.loginUser(email, password)
     .then((res) => {
-      if(res.jwt) {
-      localStorage.setItem('jwt', res.jwt);
+      localStorage.setItem('jwt', res.token);
       setIsLoggedIn(true);
       setEmail(email);
       navigate('/');
-      }
     }).catch(() => {
       setPopupImage(fail);
       setPopupTitle("Что-то пошло не так! Попробуйте ещё раз.");
