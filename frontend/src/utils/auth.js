@@ -12,6 +12,7 @@ export function registerUser({ email, password }) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
     },
     body: JSON.stringify({ email, password }),
   }).then(checkResponse);
@@ -22,6 +23,7 @@ export function loginUser({ email, password }) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
     },
     body: JSON.stringify({ email, password }),
   }).then(checkResponse);
@@ -32,6 +34,7 @@ export function getContent(jwt) {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
       'Authorization': `Bearer ${jwt}`,
     },
   }).then(checkResponse);
