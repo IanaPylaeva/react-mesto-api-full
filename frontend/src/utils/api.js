@@ -17,10 +17,10 @@ class Api {
     return {authorization: `Bearer ${localStorage.getItem('jwt')}`, ...this._headers}
   }
   
-
   /* Получить карточки с сервера */
   getInitialCards() {
     return fetch(`${this._serverUrl}/cards`, {
+      method: 'GET',
       headers: this._getHeaders(),
     })
     .then(this._checkCorrectness);
@@ -29,6 +29,7 @@ class Api {
   /* Получить информацию о пользователе с сервера */
   getUserData() {
     return fetch(`${this._serverUrl}/users/me`, {
+      method: 'GET',
       headers: this._getHeaders(),
     })
     .then(this._checkCorrectness);
