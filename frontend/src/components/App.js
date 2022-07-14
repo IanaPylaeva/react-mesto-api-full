@@ -76,6 +76,7 @@ function App() {
   }, []);
   
   /* Одновременное получение данных пользователя и карточек */
+  /*
   useEffect(() => {
     if (isLoggedIn) {
       navigate('/');
@@ -83,6 +84,21 @@ function App() {
       .then((res) => {
         setCurrentUser(res[0]);
         setCards(res[1]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+  }, [isLoggedIn, navigate]);
+  */
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/');
+      Promise.all([api.getUserData(), api.getInitialCards()])
+      .then((res) => {
+        setCurrentUser(res[0].user);
+        setCards(res[1].reverse());
       })
       .catch((err) => {
         console.log(err);
