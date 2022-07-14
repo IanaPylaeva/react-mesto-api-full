@@ -83,18 +83,18 @@ function App() {
       navigate('/');
       api
         .getUserData()
-        .then((res) => {
+        .then(res => {
           setCurrentUser(res.data);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });        
       api
         .getInitialCards()
-        .then((res) => {
+        .then(res => {
           setCards(res);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
     };
