@@ -24,12 +24,11 @@ const { login, createUser } = require('./controllers/users');
 
 const NotFoundError = require('./errors/not-found-error'); // код 404
 
+app.use(cors);
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
 app.use(helmet());
 app.use(bodyParser.json());
-
-app.use(cors);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
