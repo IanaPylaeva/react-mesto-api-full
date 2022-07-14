@@ -84,7 +84,7 @@ function App() {
       api
         .getUserData()
         .then((res) => {
-          setCurrentUser(res);
+          setCurrentUser(res.data);
       })
       .catch((err) => {
         console.log(err);
