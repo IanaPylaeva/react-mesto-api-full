@@ -36,10 +36,11 @@ function App() {
 
   /* Регистрация */
   function register(email, password) {
-    auth.registerUser(email, password).then(() => {
-      setPopupImage(success);
-      setPopupTitle("Вы успешно зарегистрировались!");
-      navigate('/sign-in');
+    auth.registerUser(email, password)
+      .then(() => {
+        setPopupImage(success);
+        setPopupTitle("Вы успешно зарегистрировались!");
+        navigate('/sign-in');
     }).catch(() => {
       setPopupImage(fail);
       setPopupTitle("Что-то пошло не так! Попробуйте ещё раз.");
@@ -48,7 +49,8 @@ function App() {
 
   /* Вход */
   function logIn(email, password) {
-    auth.loginUser(email, password).then((res) => {
+    auth.loginUser(email, password)
+    .then((res) => {
       localStorage.setItem('jwt', res.token);
       setIsLoggedIn(true);
       setEmail(email);
@@ -64,38 +66,45 @@ function App() {
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
-      auth.getContent(jwt).then((res) => {
-        if (res) {
-          setIsLoggedIn(true);
+      auth.getContent(jwt)
+        .then((res) => {
           setEmail(res.data.email);
-        }
-      }).catch((err) => {
+          setIsLoggedIn(true);
+          navigate('/');
+        })
+        .catch((err) => {
         console.error(err);
       })
     }
-  }, []);
+  }, [navigate]);
   
+  /* Одновременное получение данных пользователя и карточек */
   useEffect(() => {
     if (isLoggedIn) {
       navigate('/');
-      Promise.all([api.getUserData(), api.getInitialCards()])
-      .then((res) => {
-        setCurrentUser(res[0]);
-        setCards(res[1]);
+      api
+        .getUserData()
+        .then((res) => {
+          setCurrentUser({
+            name: res.data.name,
+            about: res.data.about,
+            avatar:res.data.avatar,
+            _id: res.data._id,
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });        
+      api
+        .getInitialCards()
+        .then((res) => {
+          setCards(res);
       })
       .catch((err) => {
         console.log(err);
       });
     };
   }, [isLoggedIn, navigate]);
-  
-  /* Одновременное получение данных пользователя и карточек */
-  /*
-  useEffect(() => { 
-    if (isLoggedIn) {
-
-  }, [isLoggedIn]);
-  */
 
   function handleEditProfileClick(){
     setIsEditProfilePopupOpen(true);

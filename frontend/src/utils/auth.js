@@ -1,3 +1,5 @@
+const BASE_URL = 'https://domain.ianapylaeva.bcknd.nomoredomains.xyz';
+
 function checkResponse(res) {
   if(res.ok) {
     return res.json();
@@ -5,37 +7,35 @@ function checkResponse(res) {
   return Promise.reject(res.status);
 }
 
-export const BASE_URL = 'https://domain.ianapylaeva.bcknd.nomoredomains.xyz';
-
-export function registerUser(email, password) {
+export const registerUser = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
     },
     body: JSON.stringify({ email, password }),
   }).then(checkResponse);
 }
 
-export function loginUser(email, password) {
+export const loginUser = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
     },
     body: JSON.stringify({ email, password }),
   }).then(checkResponse);
 }
 
-export function getContent(jwt) {
+export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
-      'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${jwt}`,
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json',
     },
   }).then(checkResponse);
 }
