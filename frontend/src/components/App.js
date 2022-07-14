@@ -51,9 +51,9 @@ function App() {
   function logIn(email, password) {
     auth.loginUser(email, password)
     .then((res) => {
-      localStorage.setItem('jwt', res.token);
-      setIsLoggedIn(true);
+      localStorage.setItem('token', res.token);
       tockenCheck();
+      setIsLoggedIn(true);
       navigate('/');
     }).catch(() => {
       setPopupImage(fail);
@@ -217,11 +217,11 @@ function App() {
             cards={cards}
           ></ProtectedRoute> 
         }></Route> 
-        <Route path="/sign-up" element={
+        <Route path="/signup" element={
           <Register register={register} />
         }></Route>
-        <Route path="/sign-in" element={
-          <Login logIn={logIn} />
+        <Route path="/signin" element={
+          <Login logIn={logIn} tockenCheck={tockenCheck} />
         }></Route>
         <Route path="*" element={
           <Navigate to="/" />
