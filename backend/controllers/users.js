@@ -134,7 +134,7 @@ module.exports.getUserInfo = (req, res, next) => {
       return res.status(200).send({ data: user });
     })
     .catch((error) => {
-      if (error.name === 'ValidationError') {
+      if (error.name === 'CastError') {
         return next(new ValidationError('Некорректный id пользователя'));
       }
       return next(error);
