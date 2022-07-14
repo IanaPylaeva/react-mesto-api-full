@@ -217,10 +217,10 @@ function App() {
             cards={cards}
           ></ProtectedRoute> 
         }></Route> 
-        <Route path="/signup" element={
+        <Route path="/sign-up" element={
           <Register register={register} />
         }></Route>
-        <Route path="/signin" element={
+        <Route path="/sign-in" element={
           <Login logIn={logIn} tockenCheck={tockenCheck} />
         }></Route>
         <Route path="*" element={
