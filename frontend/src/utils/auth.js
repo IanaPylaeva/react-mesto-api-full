@@ -1,5 +1,4 @@
-const BASE_URL=`${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`;
-console.log(`${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`);
+import {apiSettings} from './const';
 
 function checkResponse(res) {
   if(res.ok) {
@@ -9,34 +8,24 @@ function checkResponse(res) {
 }
 
 export const registerUser = (email, password) => {
-  return fetch(`${BASE_URL}/signup`, {
+  return fetch(`${apiSettings.serverUrl}/signup`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
+    headers: apiSettings.headers,
     body: JSON.stringify({ email, password }),
   }).then(checkResponse);
 }
 
 export const loginUser = (email, password) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return fetch(`${apiSettings.serverUrl}/signin`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
+    headers: apiSettings.headers,
     body: JSON.stringify({ email, password }),
   }).then(checkResponse);
 }
 
 export const getContent = (token) => {
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${apiSettings.serverUrl}/users/me`, {
     method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json',
-    },
+    headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...apiSettings.headers},
   }).then(checkResponse);
 }
