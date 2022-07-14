@@ -101,7 +101,7 @@ const api = new Api({
   serverUrl: 'https://domain.ianapylaeva.bcknd.nomoredomains.xyz',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+    'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
   },
 });
 
