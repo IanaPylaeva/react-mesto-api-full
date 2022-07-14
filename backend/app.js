@@ -26,7 +26,7 @@ const NotFoundError = require('./errors/not-found-error'); // код 404
 
 const allowedCors = {
   origin: [
-    'http://localhost:3000',
+    'http://localhost:3001',
     'http://domain.ianapylaeva.nomoredomains.xyz',
     'https://domain.ianapylaeva.nomoredomains.xyz',
   ],
