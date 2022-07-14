@@ -53,7 +53,7 @@ function App() {
     .then((res) => {
       localStorage.setItem('jwt', res.token);
       setIsLoggedIn(true);
-      setEmail(email);
+      tockenCheck();
       navigate('/');
     }).catch(() => {
       setPopupImage(fail);
@@ -65,18 +65,16 @@ function App() {
   /* Одновременное получение данных пользователя и карточек */
   useEffect(() => {
     if (isLoggedIn) {
-      api
-        .getUserData()
+      api.getUserData()
         .then(res => {
-          setCurrentUser(res.data);
+          setCurrentUser(res);
       })
       .catch(err => {
         console.log(err);
       });        
-      api
-        .getInitialCards()
-        .then(res => {
-          setCards(res);
+      api.getInitialCards()
+        .then(card => {
+          setCards(card);
       })
       .catch(err => {
         console.log(err);
@@ -84,10 +82,14 @@ function App() {
     };
   }, [isLoggedIn]);
 
-  /* Сохранить токен в локальном хранилище, установить имейл */
   useEffect(() => {
-    const token = localStorage.getItem('jwt');
-    if (token) {
+    tockenCheck();    
+  }, []);
+
+  /* Сохранить токен в локальном хранилище, установить имейл */
+  const tockenCheck = () => {
+    if (localStorage.getItem('token')) {
+      const token = localStorage.getItem('token');
       auth.getContent(token)
         .then((res) => {
           setEmail(res.data.email);
@@ -97,7 +99,7 @@ function App() {
         console.log(err);
       })
     }
-  }, []);
+  }
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -124,7 +126,7 @@ function App() {
 
   /* Сброс всех параметров после logout */
   function handleLogOut() {
-    localStorage.removeItem('jwt');//удаление токена из локального хранилища
+    localStorage.removeItem('token');//удаление токена из локального хранилища
     setEmail(null);
     setIsLoggedIn(false);
     navigate('/sign-in');
