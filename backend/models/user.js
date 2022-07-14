@@ -26,7 +26,6 @@ const userSchema = new mongoose.Schema({
     type: String, // это строка
     required: true, // обязательное поле
     unique: true, // уникальность
-    minlength: 5, // минимальная длина  — 8 символов
     validate: validator.isEmail,
   },
   password: {

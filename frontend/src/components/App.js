@@ -112,10 +112,10 @@ function App() {
 
   /* Сброс всех параметров после logout */
   function handleLogOut() {
-    setIsLoggedIn(false);
-    setEmail(null);
-    navigate('/sign-in');
     localStorage.removeItem('jwt');//удаление токена из локального хранилища
+    setEmail(null);
+    setIsLoggedIn(false);
+    navigate('/sign-in');
   }
 
   /* Ставим и убираем лайк на карточке */
