@@ -34,19 +34,6 @@ function App() {
   const [infoTooltip, setInfoTooltip] = React.useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
 
-  /* Одновременное получение данных пользователя и карточек */
-  useEffect(() => {
-    if (isLoggedIn) {
-    Promise.all([api.getUserData(), api.getInitialCards()])
-      .then((res) => {
-        setCurrentUser(res[0]);
-        setCards(res[1]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }}, [isLoggedIn]);
-
   /* Регистрация */
   function register(email, password) {
     auth.registerUser(email, password).then(() => {
@@ -87,13 +74,28 @@ function App() {
       })
     }
   }, []);
-    
+  
   useEffect(() => {
     if (isLoggedIn) {
       navigate('/');
-    }
+      Promise.all([api.getUserData(), api.getInitialCards()])
+      .then((res) => {
+        setCurrentUser(res[0]);
+        setCards(res[1]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    };
   }, [isLoggedIn, navigate]);
   
+  /* Одновременное получение данных пользователя и карточек */
+  /*
+  useEffect(() => { 
+    if (isLoggedIn) {
+
+  }, [isLoggedIn]);
+  */
 
   function handleEditProfileClick(){
     setIsEditProfilePopupOpen(true);
