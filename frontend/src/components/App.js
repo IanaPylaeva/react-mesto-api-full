@@ -61,26 +61,10 @@ function App() {
       handleInfoTooltip();
     })
   }
-
-  /* Сохранить токен в локальном хранилище, установить имейл */
-  useEffect(() => {
-    const token = localStorage.getItem('jwt');
-    if (token) {
-      auth.getContent(token)
-        .then((res) => {
-          setEmail(res.data.email);
-          setIsLoggedIn(true);
-        })
-        .catch((err) => {
-        console.log(err);
-      })
-    }
-  }, []);
   
   /* Одновременное получение данных пользователя и карточек */
   useEffect(() => {
     if (isLoggedIn) {
-      navigate('/');
       api
         .getUserData()
         .then(res => {
@@ -98,8 +82,31 @@ function App() {
         console.log(err);
       });
     };
-  }, [isLoggedIn, navigate]);
+  }, [isLoggedIn]);
 
+  /* Сохранить токен в локальном хранилище, установить имейл */
+  useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      auth.getContent(token)
+        .then((res) => {
+          setEmail(res.data.email);
+          setIsLoggedIn(true);
+        })
+        .catch((err) => {
+        console.log(err);
+      })
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/');
+      return;
+    }
+    navigate('/signin');
+  }, [isLoggedIn, navigate]);
+  
   function handleEditProfileClick(){
     setIsEditProfilePopupOpen(true);
   }
