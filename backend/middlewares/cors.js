@@ -4,6 +4,8 @@ const allowedCors = [
   'https://localhost:3000',
   'http://domain.ianapylaeva.nomoredomains.xyz',
   'https://domain.ianapylaeva.nomoredomains.xyz',
+  'http://domain.ianapylaeva.bcknd.nomoredomains.xyz',
+  'https://domain.ianapylaeva.bcknd.nomoredomains.xyz',
 ];
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE'; // Значение для заголовка Access-Control-Allow-Methods по умолчанию (разрешены все типы запросов)
 module.exports = (req, res, next) => {
