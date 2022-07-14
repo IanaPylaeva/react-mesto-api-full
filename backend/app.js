@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const express = require('express');
 
 const app = express();
@@ -9,6 +7,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const helmet = require('helmet');
+
+require('dotenv').config();
 
 const { PORT = 3000 } = process.env;
 
@@ -34,9 +34,9 @@ const allowedCors = {
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 };
 
-app.use(cors(allowedCors));
-
 mongoose.connect('mongodb://localhost:27017/mestodb');
+
+app.use(cors(allowedCors));
 
 app.use(helmet());
 app.use(bodyParser.json());
@@ -70,8 +70,8 @@ app.post('/signup', celebrate({
 
 app.use(auth);
 
-app.use('/', auth, require('./routes/users'));
-app.use('/', auth, require('./routes/cards'));
+app.use('/', require('./routes/users'));
+app.use('/', require('./routes/cards'));
 
 app.use('*', (req, res, next) => {
   next(new NotFoundError('Страницы не существует'));
