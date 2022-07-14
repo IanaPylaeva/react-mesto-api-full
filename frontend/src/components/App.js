@@ -94,17 +94,16 @@ function App() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate('/');
       Promise.all([api.getUserData(), api.getInitialCards()])
-      .then((res) => {
-        setCurrentUser(res[0].user);
-        setCards(res[1].reverse());
+      .then(([user, cards]) => {
+        setCurrentUser(user.user);
+        setCards(cards.reverse());
       })
       .catch((err) => {
         console.log(err);
       });
     }
-  }, [isLoggedIn, navigate]);
+  }, [isLoggedIn]);
   
   function handleEditProfileClick(){
     setIsEditProfilePopupOpen(true);
