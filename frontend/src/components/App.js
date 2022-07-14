@@ -64,16 +64,16 @@ function App() {
 
   /* Сохранить токен в локальном хранилище, установить имейл */
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      auth.getContent(jwt)
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      auth.getContent(token)
         .then((res) => {
           setEmail(res.data.email);
           setIsLoggedIn(true);
           navigate('/');
         })
         .catch((err) => {
-        console.error(err);
+        console.log(err);
       })
     }
   }, [navigate]);
