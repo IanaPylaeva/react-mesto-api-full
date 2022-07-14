@@ -75,15 +75,11 @@ function App() {
     }
   }, []);
   
+  /* Одновременное получение данных пользователя и карточек */
   useEffect(() => {
     if (isLoggedIn) {
       navigate('/');
-    }
-  }, [isLoggedIn, navigate]);
-  
-  /* Одновременное получение данных пользователя и карточек */
-  useEffect(() => { 
-    Promise.all([api.getUserData(), api.getInitialCards()])
+      Promise.all([api.getUserData(), api.getInitialCards()])
       .then((res) => {
         setCurrentUser(res[0]);
         setCards(res[1]);
@@ -91,8 +87,9 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-    }, []);
-
+    }
+  }, [isLoggedIn, navigate]);
+  
   function handleEditProfileClick(){
     setIsEditProfilePopupOpen(true);
   }
