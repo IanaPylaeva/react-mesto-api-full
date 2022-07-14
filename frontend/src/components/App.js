@@ -39,7 +39,7 @@ function App() {
     auth.registerUser(email, password).then(() => {
       setPopupImage(success);
       setPopupTitle("Вы успешно зарегистрировались!");
-      navigate("/sign-in");
+      navigate('/sign-in');
     }).catch(() => {
       setPopupImage(fail);
       setPopupTitle("Что-то пошло не так! Попробуйте ещё раз.");
@@ -52,7 +52,7 @@ function App() {
       localStorage.setItem('jwt', res.token);
       setIsLoggedIn(true);
       setEmail(email);
-      navigate("/");
+      navigate('/');
     }).catch(() => {
       setPopupImage(fail);
       setPopupTitle("Что-то пошло не так! Попробуйте ещё раз.");
@@ -77,7 +77,7 @@ function App() {
   
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/");
+      navigate('/');
     }
   }, [isLoggedIn, navigate]);
   
@@ -114,8 +114,8 @@ function App() {
   function handleLogOut() {
     setIsLoggedIn(false);
     setEmail(null);
-    navigate("/sign-in");
-    localStorage.removeItem("jwt");//удаление токена из локального хранилища
+    navigate('/sign-in');
+    localStorage.removeItem('jwt');//удаление токена из локального хранилища
   }
 
   /* Ставим и убираем лайк на карточке */
