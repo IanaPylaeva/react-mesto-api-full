@@ -14,7 +14,7 @@ const { PORT = 3000 } = process.env;
 
 const { celebrate, Joi, errors } = require('celebrate');
 
-const cors = require('./middlewares/cors');
+const cors = require('cors');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -24,7 +24,18 @@ const { login, createUser } = require('./controllers/users');
 
 const NotFoundError = require('./errors/not-found-error'); // код 404
 
-app.use(cors);
+const allowedCors = {
+  origin: [
+    'http://localhost:3000',
+    'http://domain.ianapylaeva.nomoredomains.xyz',
+    'https://domain.ianapylaeva.nomoredomains.xyz',
+  ],
+  credentials: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+};
+
+app.use(cors(allowedCors));
+
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
 app.use(helmet());

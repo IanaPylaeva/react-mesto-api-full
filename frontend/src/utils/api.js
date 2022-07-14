@@ -22,8 +22,6 @@ class Api {
   /* Получить карточки с сервера */
   getInitialCards() {
     return fetch(`${this._serverUrl}/cards`, {
-      mode: 'cors',
-      method: 'GET',
       headers: this._getHeaders(),
     })
     .then(this._checkCorrectness);
@@ -32,7 +30,6 @@ class Api {
   /* Получить информацию о пользователе с сервера */
   getUserData() {
     return fetch(`${this._serverUrl}/users/me`, {
-      method: 'GET',
       headers: this._getHeaders(),
     })
     .then(this._checkCorrectness);
