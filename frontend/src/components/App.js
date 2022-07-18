@@ -136,7 +136,7 @@ function App() {
 
   /* Ставим и убираем лайк на карточке */
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);// Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some((i) => i === currentUser._id);// Снова проверяем, есть ли уже лайк на этой карточке
     
     const action = !isLiked ? api.putLike(card._id) : api.deleteLike(card._id);
     action
