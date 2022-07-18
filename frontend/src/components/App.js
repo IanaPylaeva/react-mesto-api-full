@@ -89,11 +89,13 @@ function App() {
   /* Сохранить токен в локальном хранилище, установить имейл */
   const tockenCheck = () => {
     if (localStorage.getItem('token')) {
-      const token = localStorage.getItem('token');
-      auth.getContent(token)
+      /*const token = localStorage.getItem('jwt');*/
+      api.getUserData()
         .then((res) => {
-          setEmail(res.data.email);
-          setIsLoggedIn(true);
+          if (res.data) {
+            setEmail(res.data.email);
+            setIsLoggedIn(true);
+          }
         })
         .catch((err) => {
         console.log(err);

@@ -22,10 +22,11 @@ export const loginUser = (email, password) => {
     body: JSON.stringify({ email, password }),
   }).then(checkResponse);
 }
-
+/*
 export const getContent = (token) => {
   return fetch(`${apiSettings.serverUrl}/users/me`, {
     method: 'GET',
     headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...apiSettings.headers},
   }).then(checkResponse);
 }
+*/
