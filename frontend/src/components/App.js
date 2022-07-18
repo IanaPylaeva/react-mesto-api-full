@@ -96,7 +96,6 @@ function App() {
 /* Сохранить токен в локальном хранилище, установить имейл */
   const tockenCheck = () => {
     if (localStorage.getItem('token')) {
-      /*const token = localStorage.getItem('jwt');*/
       api.getUserData()
         .then((res) => {
           if (res.data) {

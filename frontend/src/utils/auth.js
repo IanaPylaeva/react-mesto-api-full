@@ -26,7 +26,7 @@ export const loginUser = ({ email, password }) => {
 export const getContent = (token) => {
   return fetch(`${apiSettings.serverUrl}/users/me`, {
     method: 'GET',
-    headers: {authorization: 'Bearer ' + localStorage.getItem('jwt'), ...apiSettings.headers},
+    headers: {authorization: 'Bearer ' + localStorage.getItem('token'), ...apiSettings.headers},
   }).then(checkResponse);
 }
 */
