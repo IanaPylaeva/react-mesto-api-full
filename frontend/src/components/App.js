@@ -34,40 +34,13 @@ function App() {
   const [infoTooltip, setInfoTooltip] = React.useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
 
-  /* Регистрация */
-  function register(email, password) {
-    auth.registerUser(email, password)
-      .then(() => {
-        setPopupImage(success);
-        setPopupTitle("Вы успешно зарегистрировались!");
-        navigate('/sign-in');
-    }).catch(() => {
-      setPopupImage(fail);
-      setPopupTitle("Что-то пошло не так! Попробуйте ещё раз.");
-    }).finally(handleInfoTooltip);
-  }
-
-  /* Вход */
-  function logIn(email, password) {
-    auth.loginUser(email, password)
-    .then((res) => {
-      localStorage.setItem('token', res.token);
-      tockenCheck();
-      setIsLoggedIn(true);
-      navigate('/');
-    }).catch(() => {
-      setPopupImage(fail);
-      setPopupTitle("Что-то пошло не так! Попробуйте ещё раз.");
-      handleInfoTooltip();
-    })
-  }
-  
   /* Одновременное получение данных пользователя и карточек */
+  
   useEffect(() => {
     if (isLoggedIn) {
       api.getUserData()
         .then(res => {
-          setCurrentUser(res);
+          setCurrentUser(res.data);
       })
       .catch(err => {
         console.log(err);
@@ -86,7 +59,41 @@ function App() {
     tockenCheck();    
   }, []);
 
-  /* Сохранить токен в локальном хранилище, установить имейл */
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/');
+    }
+  }, [isLoggedIn, navigate]);
+
+  /* Вход */
+  function logIn({ email, password }) {
+    auth.loginUser({ email, password })
+    .then((res) => {
+      localStorage.setItem('token', res.token);
+      tockenCheck();
+      setIsLoggedIn(true);
+      navigate('/');
+    }).catch(() => {
+      setPopupImage(fail);
+      setPopupTitle("Что-то пошло не так! Попробуйте ещё раз.");
+      handleInfoTooltip();
+    })
+  }
+
+  /* Регистрация */
+  function register({ email, password }) {
+    auth.registerUser({ email, password })
+      .then(() => {
+        setPopupImage(success);
+        setPopupTitle("Вы успешно зарегистрировались!");
+        navigate('/sign-in');
+    }).catch(() => {
+      setPopupImage(fail);
+      setPopupTitle("Что-то пошло не так! Попробуйте ещё раз.");
+    }).finally(handleInfoTooltip);
+  }  
+
+/* Сохранить токен в локальном хранилище, установить имейл */
   const tockenCheck = () => {
     if (localStorage.getItem('token')) {
       /*const token = localStorage.getItem('jwt');*/
@@ -103,12 +110,6 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/');
-    }
-  }, [isLoggedIn, navigate]);
-  
   function handleEditProfileClick(){
     setIsEditProfilePopupOpen(true);
   }
@@ -159,10 +160,10 @@ function App() {
   }
 
   /* Обновляет данные пользователя */
-  function handleUpdateUser(data) {
-    api.patchUserInfo(data)
-      .then(newUser => {
-        setCurrentUser(newUser);
+  function handleUpdateUser({ name, about }) {
+    api.patchUserInfo({ name, about })
+      .then(res => {
+        setCurrentUser({...currentUser, name, about });
         closeAllPopups();
       }).catch((err) => {
         console.error(err);
@@ -170,10 +171,10 @@ function App() {
   }
 
   /* Обновляет аватар */
-  function handleAvatarUpdate(data) {
-    api.patchUserAvatar(data)
-      .then(newAvatar => {
-        setCurrentUser(newAvatar);
+  function handleAvatarUpdate({ avatar }) {
+    api.patchUserAvatar({ avatar })
+      .then(res => {
+        setCurrentUser({...currentUser, avatar });
         closeAllPopups();
       }).catch((err) => {
         console.error(err);

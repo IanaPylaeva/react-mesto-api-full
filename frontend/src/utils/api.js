@@ -97,15 +97,7 @@ class Api {
     })
     .then(this._checkCorrectness);
   };
-
-  /* Одновременно получить данные пользователя и карточки */
-  getAllData() {
-    return Promise.all([this.getUserData(), this.getInitialCards()]);
-  }
-
 };
-
-
 
 const api = new Api(apiSettings);
 

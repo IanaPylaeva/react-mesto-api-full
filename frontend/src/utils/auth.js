@@ -7,7 +7,7 @@ function checkResponse(res) {
   return Promise.reject(res.status);
 }
 
-export const registerUser = (email, password) => {
+export const registerUser = ({ email, password }) => {
   return fetch(`${apiSettings.serverUrl}/signup`, {
     method: 'POST',
     headers: apiSettings.headers,
@@ -15,7 +15,7 @@ export const registerUser = (email, password) => {
   }).then(checkResponse);
 }
 
-export const loginUser = (email, password) => {
+export const loginUser = ({ email, password }) => {
   return fetch(`${apiSettings.serverUrl}/signin`, {
     method: 'POST',
     headers: apiSettings.headers,
