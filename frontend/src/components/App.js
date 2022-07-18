@@ -35,7 +35,6 @@ function App() {
   const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
 
   /* Одновременное получение данных пользователя и карточек */
-  
   useEffect(() => {
     if (isLoggedIn) {
       api.getUserData()
