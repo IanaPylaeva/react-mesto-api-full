@@ -99,48 +99,6 @@ module.exports.updateAvatar = (req, res, next) => {
 };
 
 /* Получает из запроса почту и пароль и проверяет их */
-/*
-module.exports.login = (req, res, next) => {
-  const { email, password } = req.body;
-
-  User.findOne({ email }).select('+password') // в случае аутентификации хеш пароля нужен
-    .then((user) => {
-      if (!user) {
-        return Promise.reject(new Error('Неправильные почта или пароль'));
-      }
-      // сравниваем переданный пароль и хеш из базы
-      return Promise.all([bcrypt.compare(password, user.password), user]);
-    })
-    .then(([isPasswordCorrect, user]) => {
-      if (!isPasswordCorrect) {
-        return Promise.reject(new Error('Неправильная почта или пароль'));
-      }
-      const token = jwt.sign(
-        { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-        { expiresIn: '7d' }, // токен будет просрочен через 7 дней после создания
-      );
-      return res.send({ token });
-    })
-    .catch(() => next(new AuthorizationError('Передан неверный логин или пароль')));
-};
-
-module.exports.login = (req, res, next) => {
-  const { email, password } = req.body;
-
-  return User.findUserByCredentials({ email, password })
-    .then((user) => {
-      const token = jwt.sign(
-        { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-        { expiresIn: '7d' }, // токен будет просрочен через 7 дней после создания
-      );
-      return res.send({ token });
-    })
-    .catch(() => next(new AuthorizationError('Передан неверный логин или пароль')));
-};
-*/
-
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
