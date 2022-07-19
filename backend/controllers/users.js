@@ -99,6 +99,7 @@ module.exports.updateAvatar = (req, res, next) => {
 };
 
 /* Получает из запроса почту и пароль и проверяет их */
+/*
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
@@ -114,6 +115,21 @@ module.exports.login = (req, res, next) => {
       if (!isPasswordCorrect) {
         return Promise.reject(new Error('Неправильная почта или пароль'));
       }
+      const token = jwt.sign(
+        { _id: user._id },
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        { expiresIn: '7d' }, // токен будет просрочен через 7 дней после создания
+      );
+      return res.send({ token });
+    })
+    .catch(() => next(new AuthorizationError('Передан неверный логин или пароль')));
+};
+*/
+module.exports.login = (req, res, next) => {
+  const { email, password } = req.body;
+
+  return User.findUserByCredentials(email, password)
+    .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
