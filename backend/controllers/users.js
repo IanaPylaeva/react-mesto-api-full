@@ -124,7 +124,7 @@ module.exports.login = (req, res, next) => {
     })
     .catch(() => next(new AuthorizationError('Передан неверный логин или пароль')));
 };
-*/
+
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
@@ -138,6 +138,32 @@ module.exports.login = (req, res, next) => {
       return res.send({ token });
     })
     .catch(() => next(new AuthorizationError('Передан неверный логин или пароль')));
+};
+*/
+
+module.exports.login = (req, res, next) => {
+  const { email, password } = req.body;
+
+  User.findOne({ email }).select('+password') // в случае аутентификации хеш пароля нужен
+    .then((user) => {
+      if (!user) {
+        throw new AuthorizationError('Неправильные почта или пароль');
+      }
+      // сравниваем переданный пароль и хеш из базы
+      return Promise.all([user, bcrypt.compare(password, user.password)]);
+    })
+    .then(([user, isPasswordCorrect]) => {
+      if (!isPasswordCorrect) {
+        throw new AuthorizationError('Неправильная почта или пароль');
+      }
+      const token = jwt.sign(
+        { _id: user._id },
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        { expiresIn: '7d' }, // токен будет просрочен через 7 дней после создания
+      );
+      return res.send({ token });
+    })
+    .catch(next);
 };
 
 /* Получение информации о пользователе */
