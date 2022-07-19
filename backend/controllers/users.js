@@ -99,7 +99,7 @@ module.exports.updateAvatar = (req, res, next) => {
 };
 
 /* Получает из запроса почту и пароль и проверяет их */
-module.exports.login = (req, res) => {
+module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
   User.findOne({ email }).select('+password') // в случае аутентификации хеш пароля нужен
@@ -121,7 +121,7 @@ module.exports.login = (req, res) => {
       );
       return res.send({ token });
     })
-    .catch(() => new AuthorizationError('Передан неверный логин или пароль'));
+    .catch(() => next(new AuthorizationError('Передан неверный логин или пароль')));
 };
 
 /* Получение информации о пользователе */
